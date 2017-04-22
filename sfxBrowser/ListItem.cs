@@ -47,7 +47,9 @@ namespace sfxBrowser
             {
                 if (children[c].ImageIndex == 1)
                 {
-                    if ((fileNameFilter.Length > 0 && children[c].FileName.Contains(fileNameFilter)) || fileNameFilter == "")
+                    string filename = children[c].FileName.ToLower();
+                    string contains = fileNameFilter.ToLower();
+                    if (filename.Contains(contains) || fileNameFilter == "")
                     {
                         if ((children[c].FileExtension == ".mp3" && allowMP3) || (children[c].FileExtension == ".wav" && allowWAV) || (children[c].FileExtension == ".ogg" && allowOGG))
                         {
