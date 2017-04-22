@@ -231,6 +231,7 @@
             this.txtFileNameFilter.Size = new System.Drawing.Size(513, 20);
             this.txtFileNameFilter.TabIndex = 16;
             this.txtFileNameFilter.TextChanged += new System.EventHandler(this.txtFileNameFilter_TextChanged);
+            this.txtFileNameFilter.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFileNameFilter_KeyUp);
             // 
             // label4
             // 

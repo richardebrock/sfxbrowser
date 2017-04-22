@@ -96,7 +96,9 @@ namespace sfxBrowser
                 if (item.FileExtension == ".ogg" && btnOGG.Checked == false) return;
                 if (txtFileNameFilter.Text.Length>0)
                 {
-                    if(false==item.FileName.Contains(txtFileNameFilter.Text))
+                    string filename = item.FileName.ToLower();
+                    string contains = txtFileNameFilter.Text.ToLower();
+                    if(false==filename.Contains(contains))
                     {
                         return;
                     }
@@ -313,7 +315,7 @@ namespace sfxBrowser
         }
         private void txtFileNameFilter_TextChanged(object sender, EventArgs e)
         {
-            RebuildTree();
+            
         }
         private void speed_ValueChanged(object sender, EventArgs e)
         {
@@ -335,6 +337,12 @@ namespace sfxBrowser
                     progressBar1.Value = (int)wplayer.controls.currentPosition;
                 }
             }
+        }
+
+        private void txtFileNameFilter_KeyUp(object sender, KeyEventArgs e)
+        {
+            RebuildTree();
+
         }
     }
 }
