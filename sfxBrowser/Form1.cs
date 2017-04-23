@@ -281,7 +281,7 @@ namespace sfxBrowser
             {
                 if (saveFileDialog1.FileName != "")
                 {
-                    File.Copy(currentAudioFilePath, saveFileDialog1.FileName);
+                    File.Copy(currentAudioFilePath, saveFileDialog1.FileName,true);
                     MessageBox.Show("File copied to " + saveFileDialog1.FileName);
                 }
             }
