@@ -152,11 +152,13 @@ namespace sfxBrowser
         }
         void RebuildTree()
         {
+            fileTree.BeginUpdate();
             fileTree.Nodes.Clear();
             if (rootItem.MatchingChildCount(txtFileNameFilter.Text,btnWAV.Checked,btnMP3.Checked,btnOGG.Checked) > 0)
             {
                 AddNodeToTree(rootItem, null);
             }
+            fileTree.EndUpdate();
         }
         void StoreSettings()
         {
@@ -373,6 +375,13 @@ namespace sfxBrowser
         private void playerTrack_Scroll(object sender, EventArgs e)
         {
             wplayer.controls.currentPosition = playerTrack.Value;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            fileTree.BeginUpdate();
+            fileTree.Nodes.Clear();
+            fileTree.EndUpdate();
         }
     }
 }
