@@ -106,5 +106,29 @@ namespace sfxBrowser {
                 this["ogg"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastfile {
+            get {
+                return ((string)(this["lastfile"]));
+            }
+            set {
+                this["lastfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastsearch {
+            get {
+                return ((string)(this["lastsearch"]));
+            }
+            set {
+                this["lastsearch"] = value;
+            }
+        }
     }
 }
