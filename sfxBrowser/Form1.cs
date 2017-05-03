@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,8 @@ namespace sfxBrowser
         private WMPLib.WindowsMediaPlayer wplayer;
         private bool loadingSettings = false;
         private ListItem rootItem = null;
+        private string lastUsedFilePath = "";
+        private string lastSearchString = "";
         public Form1()
         {
             InitializeComponent();
@@ -27,9 +30,14 @@ namespace sfxBrowser
             fileTree.ImageList = imageList1;
             rootItem = new ListItem();
             LoadSettings();
-            if(txtPath.Text!="")
-            {
+            txtFileNameFilter.Text = lastSearchString;
+            if (txtPath.Text!="")
+            {                
+                bool bAutoPlay = btnAutoPlay.Checked;
+                btnAutoPlay.Checked = false;
                 UpdateFileList();
+                btnAutoPlay.Checked = bAutoPlay;
+                fileTree.Focus();
             }
             UpdateControlStates();
             timer1.Start();
@@ -66,7 +74,7 @@ namespace sfxBrowser
                     ListItem childItem = new ListItem();
                     childItem.FilePath = strFilePath;
                     childItem.ImageIndex = 1;
-                    item.children.Add(childItem);
+                    item.children.Add(childItem);                    
                     matchingFileCount++;
                 }
             }
@@ -86,6 +94,10 @@ namespace sfxBrowser
                 }
             }
             RebuildTree();
+            if (fileTree.SelectedNode != null)
+            {
+                fileTree.SelectedNode.EnsureVisible();                
+            }
         }
         void AddNodeToTree(ListItem item, TreeNode parentNode)
         {
@@ -133,6 +145,10 @@ namespace sfxBrowser
                 }
                 aNode.Expand();
             }
+            if (aNode.Tag.Equals(lastUsedFilePath))
+            {
+                fileTree.SelectedNode = aNode;
+            }
         }
         void RebuildTree()
         {
@@ -152,6 +168,8 @@ namespace sfxBrowser
             Settings1.Default.ogg = btnOGG.Checked;
             Settings1.Default.path = txtPath.Text;
             Settings1.Default.volume = volume.Value;
+            Settings1.Default.lastfile = lastUsedFilePath;
+            Settings1.Default.lastsearch = lastSearchString;
             Settings1.Default.Save();
         }
         void LoadSettings()
@@ -164,6 +182,8 @@ namespace sfxBrowser
             btnWAV.Checked = Settings1.Default.wav;
             btnOGG.Checked = Settings1.Default.ogg;
             txtPath.Text = Settings1.Default.path;
+            lastUsedFilePath = Settings1.Default.lastfile;
+            lastSearchString = Settings1.Default.lastsearch;
             loadingSettings = false;
         }
         void UpdateControlStates()
@@ -194,7 +214,7 @@ namespace sfxBrowser
             DialogResult result = fbd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                txtPath.Text = fbd.SelectedPath;
+                txtPath.Text = fbd.SelectedPath;                
                 StoreSettings();
                 UpdateFileList();
                 UpdateControlStates();
@@ -215,6 +235,8 @@ namespace sfxBrowser
             if (currentAudioFileExt == ".mp3" || currentAudioFileExt == ".wav" || currentAudioFileExt == ".ogg")
             {                
                 wplayer.URL = currentAudioFilePath;
+                lastUsedFilePath = currentAudioFilePath;
+                StoreSettings();
                 if (btnAutoPlay.Checked == true)
                 {
                     PlaySelectedSound();
@@ -260,12 +282,12 @@ namespace sfxBrowser
         {
             if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPlaying)
             {
-                progressBar1.Maximum = (int)wplayer.currentMedia.duration;
+                playerTrack.Maximum = (int)wplayer.currentMedia.duration;
                 txtDuration.Text = wplayer.currentMedia.durationString;                
             }
             if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsStopped)
             {
-                progressBar1.Value = (int)wplayer.controls.currentPosition;
+                playerTrack.Value = (int)wplayer.controls.currentPosition;
                 btnPlay.Text = "Play";
             }
         }
@@ -315,7 +337,8 @@ namespace sfxBrowser
         }
         private void txtFileNameFilter_TextChanged(object sender, EventArgs e)
         {
-            
+            lastSearchString = txtFileNameFilter.Text;
+            StoreSettings();
         }
         private void speed_ValueChanged(object sender, EventArgs e)
         {
@@ -334,15 +357,21 @@ namespace sfxBrowser
                 WMPLib.WMPPlayState ps = wplayer.playState;
                 if (ps == WMPLib.WMPPlayState.wmppsPlaying)
                 {
-                    progressBar1.Value = (int)wplayer.controls.currentPosition;
+                    playerTrack.Value = (int)wplayer.controls.currentPosition;
+                    int hh = (int)Math.Floor(wplayer.controls.currentPosition / 3600.0);
+                    int mm = (int)Math.Floor((wplayer.controls.currentPosition - (hh * 3600)) / 60.0);
+                    int ss = (int)Math.Floor((wplayer.controls.currentPosition - ((hh * 3600) + (mm * 60)) / 60.0));
+                    txtPosition.Text = hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2");
                 }
             }
         }
-
         private void txtFileNameFilter_KeyUp(object sender, KeyEventArgs e)
         {
             RebuildTree();
-
+        }
+        private void playerTrack_Scroll(object sender, EventArgs e)
+        {
+            wplayer.controls.currentPosition = playerTrack.Value;
         }
     }
 }

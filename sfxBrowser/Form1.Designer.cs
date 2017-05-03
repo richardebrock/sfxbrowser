@@ -54,15 +54,17 @@
             this.speed = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.playerTrack = new System.Windows.Forms.TrackBar();
             this.txtDuration = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtPosition = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.volume)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speed)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerTrack)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -93,6 +95,7 @@
             this.fileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileTree.HideSelection = false;
             this.fileTree.Location = new System.Drawing.Point(0, 129);
             this.fileTree.Name = "fileTree";
             this.fileTree.Size = new System.Drawing.Size(1092, 402);
@@ -309,7 +312,8 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.progressBar1);
+            this.panel1.Controls.Add(this.txtPosition);
+            this.panel1.Controls.Add(this.playerTrack);
             this.panel1.Controls.Add(this.txtDuration);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtPath);
@@ -329,18 +333,20 @@
             this.panel1.Size = new System.Drawing.Size(1092, 539);
             this.panel1.TabIndex = 0;
             // 
-            // progressBar1
+            // playerTrack
             // 
-            this.progressBar1.Location = new System.Drawing.Point(105, 99);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(221, 15);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 21;
+            this.playerTrack.AutoSize = false;
+            this.playerTrack.Location = new System.Drawing.Point(105, 99);
+            this.playerTrack.Name = "playerTrack";
+            this.playerTrack.Size = new System.Drawing.Size(221, 24);
+            this.playerTrack.TabIndex = 21;
+            this.playerTrack.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.playerTrack.Scroll += new System.EventHandler(this.playerTrack_Scroll);
             // 
             // txtDuration
             // 
             this.txtDuration.AutoSize = true;
-            this.txtDuration.Location = new System.Drawing.Point(50, 99);
+            this.txtDuration.Location = new System.Drawing.Point(50, 102);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(49, 13);
             this.txtDuration.TabIndex = 20;
@@ -349,7 +355,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(-3, 99);
+            this.label6.Location = new System.Drawing.Point(-3, 102);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 19;
@@ -359,6 +365,15 @@
             // 
             this.timer1.Interval = 250;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // txtPosition
+            // 
+            this.txtPosition.AutoSize = true;
+            this.txtPosition.Location = new System.Drawing.Point(332, 102);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Size = new System.Drawing.Size(49, 13);
+            this.txtPosition.TabIndex = 22;
+            this.txtPosition.Text = "00:00:00";
             // 
             // Form1
             // 
@@ -379,6 +394,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.speed)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerTrack)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -410,8 +426,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label txtDuration;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TrackBar playerTrack;
+        private System.Windows.Forms.Label txtPosition;
     }
 }
 
