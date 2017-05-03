@@ -358,9 +358,10 @@ namespace sfxBrowser
                 if (ps == WMPLib.WMPPlayState.wmppsPlaying)
                 {
                     playerTrack.Value = (int)wplayer.controls.currentPosition;
-                    int hh = (int)Math.Floor(wplayer.controls.currentPosition / 3600.0);
-                    int mm = (int)Math.Floor((wplayer.controls.currentPosition - (hh * 3600)) / 60.0);
-                    int ss = (int)Math.Floor((wplayer.controls.currentPosition - ((hh * 3600) + (mm * 60)) / 60.0));
+                    double position = wplayer.controls.currentPosition;
+                    int hh = (int)Math.Floor(position / 3600.0);
+                    int mm = (int)Math.Floor((position - (hh * 3600)) / 60.0);
+                    int ss = (int)position - ((hh * 3600) + (mm * 60));
                     txtPosition.Text = hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2");
                 }
             }

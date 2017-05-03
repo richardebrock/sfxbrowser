@@ -54,11 +54,11 @@
             this.speed = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtPosition = new System.Windows.Forms.Label();
             this.playerTrack = new System.Windows.Forms.TrackBar();
             this.txtDuration = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtPosition = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.volume)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(-3, 1);
+            this.label2.Location = new System.Drawing.Point(-3, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 13);
             this.label2.TabIndex = 0;
@@ -85,9 +85,10 @@
             // 
             // txtPath
             // 
-            this.txtPath.Location = new System.Drawing.Point(0, 26);
+            this.txtPath.Location = new System.Drawing.Point(144, 8);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(845, 20);
+            this.txtPath.ReadOnly = true;
+            this.txtPath.Size = new System.Drawing.Size(815, 20);
             this.txtPath.TabIndex = 0;
             // 
             // fileTree
@@ -96,15 +97,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fileTree.HideSelection = false;
-            this.fileTree.Location = new System.Drawing.Point(0, 129);
+            this.fileTree.Location = new System.Drawing.Point(0, 113);
             this.fileTree.Name = "fileTree";
-            this.fileTree.Size = new System.Drawing.Size(1092, 402);
+            this.fileTree.Size = new System.Drawing.Size(1092, 418);
             this.fileTree.TabIndex = 2;
             this.fileTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fileTree_AfterSelect);
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(851, 20);
+            this.btnBrowse.Location = new System.Drawing.Point(964, 3);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(96, 30);
             this.btnBrowse.TabIndex = 1;
@@ -126,7 +127,7 @@
             // btnOGG
             // 
             this.btnOGG.AutoSize = true;
-            this.btnOGG.Location = new System.Drawing.Point(159, 67);
+            this.btnOGG.Location = new System.Drawing.Point(162, 45);
             this.btnOGG.Name = "btnOGG";
             this.btnOGG.Size = new System.Drawing.Size(50, 17);
             this.btnOGG.TabIndex = 6;
@@ -169,7 +170,7 @@
             // btnMP3
             // 
             this.btnMP3.AutoSize = true;
-            this.btnMP3.Location = new System.Drawing.Point(105, 68);
+            this.btnMP3.Location = new System.Drawing.Point(108, 45);
             this.btnMP3.Name = "btnMP3";
             this.btnMP3.Size = new System.Drawing.Size(48, 17);
             this.btnMP3.TabIndex = 4;
@@ -189,7 +190,7 @@
             // btnWAV
             // 
             this.btnWAV.AutoSize = true;
-            this.btnWAV.Location = new System.Drawing.Point(48, 68);
+            this.btnWAV.Location = new System.Drawing.Point(51, 45);
             this.btnWAV.Name = "btnWAV";
             this.btnWAV.Size = new System.Drawing.Size(51, 17);
             this.btnWAV.TabIndex = 5;
@@ -219,7 +220,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(851, 58);
+            this.btnRefresh.Location = new System.Drawing.Point(964, 38);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(96, 31);
             this.btnRefresh.TabIndex = 3;
@@ -229,9 +230,9 @@
             // 
             // txtFileNameFilter
             // 
-            this.txtFileNameFilter.Location = new System.Drawing.Point(332, 64);
+            this.txtFileNameFilter.Location = new System.Drawing.Point(335, 43);
             this.txtFileNameFilter.Name = "txtFileNameFilter";
-            this.txtFileNameFilter.Size = new System.Drawing.Size(513, 20);
+            this.txtFileNameFilter.Size = new System.Drawing.Size(623, 20);
             this.txtFileNameFilter.TabIndex = 16;
             this.txtFileNameFilter.TextChanged += new System.EventHandler(this.txtFileNameFilter_TextChanged);
             this.txtFileNameFilter.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFileNameFilter_KeyUp);
@@ -239,7 +240,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(-3, 68);
+            this.label4.Location = new System.Drawing.Point(-3, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 17;
@@ -248,7 +249,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(228, 67);
+            this.label5.Location = new System.Drawing.Point(231, 46);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 18;
@@ -333,10 +334,19 @@
             this.panel1.Size = new System.Drawing.Size(1092, 539);
             this.panel1.TabIndex = 0;
             // 
+            // txtPosition
+            // 
+            this.txtPosition.AutoSize = true;
+            this.txtPosition.Location = new System.Drawing.Point(332, 77);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Size = new System.Drawing.Size(49, 13);
+            this.txtPosition.TabIndex = 22;
+            this.txtPosition.Text = "00:00:00";
+            // 
             // playerTrack
             // 
             this.playerTrack.AutoSize = false;
-            this.playerTrack.Location = new System.Drawing.Point(105, 99);
+            this.playerTrack.Location = new System.Drawing.Point(105, 73);
             this.playerTrack.Name = "playerTrack";
             this.playerTrack.Size = new System.Drawing.Size(221, 24);
             this.playerTrack.TabIndex = 21;
@@ -346,7 +356,7 @@
             // txtDuration
             // 
             this.txtDuration.AutoSize = true;
-            this.txtDuration.Location = new System.Drawing.Point(50, 102);
+            this.txtDuration.Location = new System.Drawing.Point(50, 77);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(49, 13);
             this.txtDuration.TabIndex = 20;
@@ -355,7 +365,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(-3, 102);
+            this.label6.Location = new System.Drawing.Point(-3, 76);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 19;
@@ -365,15 +375,6 @@
             // 
             this.timer1.Interval = 250;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.AutoSize = true;
-            this.txtPosition.Location = new System.Drawing.Point(332, 102);
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(49, 13);
-            this.txtPosition.TabIndex = 22;
-            this.txtPosition.Text = "00:00:00";
             // 
             // Form1
             // 
